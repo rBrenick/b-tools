@@ -14,4 +14,6 @@ Maya Tools Module
 bTools is now installed
 
 Go to the newly created bTools menu and run Setup Hotkeys
+
+
 ![image showing how to get to the bTools menu in the menubar](https://i.imgur.com/5kJH6cm.png)
