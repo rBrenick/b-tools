@@ -1,19 +1,22 @@
 # bTools
 Maya Tools Module
 
-1. Download the bTools folder
+# Install options
 
-2. Place "bTools.mod" into 
-\MyDocuments\maya\modules
-
-3. Open the file and repath the folder to the local folder
-
-4. Restart Maya
+<pre>
+Run install_maya_mod.bat (will create a .mod file in your maya/modules folder)
+Restart Maya
+</pre>
 
 
-bTools is now installed
+# Start the tool
+<pre>
 
-Go to the newly created bTools menu and run Setup Hotkeys
+# The following lines are in the userSetup.py so no startup script is required.
 
+import bTools.ui.menu
+bTools.ui.menu.setup()
 
-![image showing how to get to the bTools menu in the menubar](https://i.imgur.com/5kJH6cm.png)
+</pre>
+
+![image showing where to find the bTools menu in the menubar](https://raw.githubusercontent.com/rBrenick/bTools/master/docs/example_image.png)
