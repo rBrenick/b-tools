@@ -25,5 +25,3 @@ bTools menu is now in Mayas menu bar
 
 ![image showing where to find the bTools menu in the menubar](https://raw.githubusercontent.com/rBrenick/bTools/master/docs/example_image.png)
 
-
-NEW LINE
