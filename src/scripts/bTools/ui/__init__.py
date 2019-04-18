@@ -32,3 +32,5 @@ class DefaultWindow(object):
     
     def close(self, *args):
         pm.deleteUI(self.win)
+
+

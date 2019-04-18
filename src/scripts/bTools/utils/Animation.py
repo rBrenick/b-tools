@@ -151,3 +151,5 @@ def generateRandomVector(length=3, weights=(1, 1, 1)):
         vector.append(random.uniform(-weight, weight))
         
     return vector
+
+

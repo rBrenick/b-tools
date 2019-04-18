@@ -267,3 +267,5 @@ class NoiseGenerator(object):
 
 if __name__ == '__main__':
     NoiseGenerator_UI()
+
+

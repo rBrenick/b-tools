@@ -12,3 +12,4 @@ class MarkingMenus:
 class OptionVars:
     SavedSelection = "bTools_SavedSelection"
     SelectVerticesBelowInfluence = "bTools_SelectVerticesBelowInfluence"
+

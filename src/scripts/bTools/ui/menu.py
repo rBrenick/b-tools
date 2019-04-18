@@ -43,3 +43,5 @@ def deleteMenu(menuName):
             mDict[m.getLabel()] = m
 
     pm.deleteUI(mDict.get(MENU_NAME))
+
+

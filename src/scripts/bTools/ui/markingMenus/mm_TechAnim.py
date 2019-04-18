@@ -86,3 +86,5 @@ def removeOldMarkingMenu():
     if pm.popupMenu(MENU_NAME, ex=1):
         pm.deleteUI(MENU_NAME)
         
+
+

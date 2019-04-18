@@ -182,3 +182,5 @@ def setupDefaultHotkeys():
         setupModelingHotkeys()
         
     print(k.Module.name+": Hotkeys Setup")
+
+

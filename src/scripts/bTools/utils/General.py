@@ -46,3 +46,4 @@ def exportAllToSameName():
     pm.mel.FBXExportFileVersion(v="FBX201400")
     pm.mel.eval('file -force -options "v=0;" -type "FBX export" -pr -ea "{}";'.format(fbxPath))
     sys.stdout.write("Exported FBX: {}\n".format(fbxPath))
+

@@ -117,3 +117,5 @@ class cameraWindow(QtWidgets.QDialog):
         qtLayout.addWidget(paneLayoutQt)
 
         self.show()
+
+

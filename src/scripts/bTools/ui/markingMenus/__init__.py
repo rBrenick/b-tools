@@ -29,3 +29,5 @@ def techAnim_MarkingMenu_Press():
 def techAnim_MarkingMenu_Release():
     mm_TechAnim.removeOldMarkingMenu()
 
+
+
