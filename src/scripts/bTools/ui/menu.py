@@ -13,8 +13,8 @@ def createCommand(path="bTools", command="main()"):
 def createMenu():
     pm.menu(MENU_NAME, parent="MayaWindow", allowOptionBoxes=True, tearOff=True)
     pm.menuItem("Rebuild Menu", command=createCommand(path="bTools.ui.menu", command="setup()"))
-    pm.menuItem("Setup Hotkeys", command=createCommand(path="bTools.utils.Hotkeys", command="setupDefaultHotkeys()"))
-    pm.menuItem("HotkeyOptions", command=createCommand(path="bTools.utils.Hotkeys", command="showHotkeyOptionsMenu()"), optionBox=True)
+    pm.menuItem("Setup Hotkeys", command=createCommand(path="bTools.utilities.hotkeys", command="setupDefaultHotkeys()"))
+    pm.menuItem("HotkeyOptions", command=createCommand(path="bTools.utilities.hotkeys", command="showHotkeyOptionsMenu()"), optionBox=True)
     pm.menuItem(label="Tools", divider=True)
     pm.menuItem("ScriptTree", command=createCommand(path="ScriptTree.ScriptTree", command="main()"))
     # pm.menuItem('Allow Model Thing 1', checkBox=True)

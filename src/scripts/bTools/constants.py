@@ -3,7 +3,7 @@ class Module:
     name = "bTools"
 
 class Hotkeys:
-    utilsCmdForm = "import bTools.utils; bTools.utils.{}"
+    utilsCmdForm = "import bTools.utilities; bTools.utilities.{}"
 
 class MarkingMenus:
     category = Module.name+"_MarkingMenus"

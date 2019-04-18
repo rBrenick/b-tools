@@ -6,5 +6,6 @@ def Logger(name):
 log = Logger("bTools")
 
 import bTools.ui.qtUtils as qt
-from bTools import utils
+from bTools import utilities as utils
+
 
