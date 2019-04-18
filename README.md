@@ -13,14 +13,8 @@ Richard Brenick Maya Tools Module
 3. Restart Maya
 </pre>
 
-# Start the tool
-1. Run this script in a python tab in maya
+# tool locations
 
-<pre>
-
-from bTools import bTools_UI
-bTools_UI.main()
-
-</pre>
+![image showing where to find the bTools menu in the menubar](https://raw.githubusercontent.com/rBrenick/bTools/master/docs/example_image.png)
 
 
