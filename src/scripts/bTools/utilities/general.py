@@ -6,44 +6,46 @@ import bTools.constants as k
 from maya import cmds
 
 
-def moveToOrigo(node=None):
+def move_to_origo(node=None):
     if not node:
         for node in pm.selected():
-            moveToOrigo(node)
+            move_to_origo(node)
         return
     
-    pm.move(node, [0,0,0], rpr=True)
+    pm.move(node, [0, 0, 0], rpr=True)
     
 
-def moveToOrigoOrWeightHammer():
-    selectedComponents = filter(lambda x: isinstance(x, (pm.MeshVertex, pm.MeshEdge, pm.MeshFace)), pm.selected())
-    if not selectedComponents:
-        moveToOrigo()
+def move_to_origo_or_weight_hammer():
+    selected_components = filter(lambda x: isinstance(x, (pm.MeshVertex, pm.MeshEdge, pm.MeshFace)), pm.selected())
+    if not selected_components:
+        move_to_origo()
     else:
         pm.mel.weightHammerVerts()
 
 
-def saveSelection():
+def save_selection():
     pm.optionVar[k.OptionVars.SavedSelection] = cmds.ls(sl=True)
 
 
-def selectSavedSelection():
-    savedSel = pm.optionVar.get(k.OptionVars.SavedSelection)
-    if savedSel:
-        cmds.select(savedSel, add=True)
+def select_saved_selection():
+    saved_sel = pm.optionVar.get(k.OptionVars.SavedSelection)
+    if saved_sel:
+        cmds.select(saved_sel, add=True)
 
 
-def deselectSavedSelection():
-    savedSel = pm.optionVar.get(k.OptionVars.SavedSelection)
-    if savedSel:
-        cmds.select(savedSel, deselect=True)
+def deselect_saved_selection():
+    saved_sel = pm.optionVar.get(k.OptionVars.SavedSelection)
+    if saved_sel:
+        cmds.select(saved_sel, deselect=True)
 
         
-def exportAllToSameName():
+def export_all_to_same_name():
     if not pm.sceneName():
+        pm.warning("No scene name has been set for the maya file")
         return
-    fbxPath = pm.sceneName().replace(".ma", ".fbx").replace(".mb", ".fbx").replace("\\", "/")
+
+    fbx_path = pm.sceneName().replace(".ma", ".fbx").replace(".mb", ".fbx").replace("\\", "/")
     pm.mel.FBXExportFileVersion(v="FBX201400")
-    pm.mel.eval('file -force -options "v=0;" -type "FBX export" -pr -ea "{}";'.format(fbxPath))
-    sys.stdout.write("Exported FBX: {}\n".format(fbxPath))
+    pm.mel.eval('file -force -options "v=0;" -type "FBX export" -pr -ea "{}";'.format(fbx_path))
+    sys.stdout.write("Exported FBX: {}\n".format(fbx_path))
 

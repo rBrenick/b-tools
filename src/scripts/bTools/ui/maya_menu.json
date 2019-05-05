@@ -1,0 +1,41 @@
+{
+  "__meta_info__": {
+    "author": "rBrenick"
+  }, 
+  "menu_items": {
+    "UI": {
+      "sub_menu": "True", 
+      "Rebuild Menu": {
+        "module": "bTools.ui.menu", 
+        "command": "setup()", 
+        "option_box": "False", 
+        "language": "python"
+      }
+    }, 
+    "Setup Hotkeys": {
+      "module": "bTools.utilities.hotkeys", 
+      "command": "setup_default_hotkeys()", 
+      "option_box": "False", 
+      "language": "python"
+    }, 
+    "Setup Hotkeys OptionBox": {
+      "module": "bTools.utilities.hotkeys", 
+      "command": "show_hotkey_options_menu()", 
+      "option_box": "True", 
+      "language": "python"
+    }, 
+    "-----": "Tools", 
+    "ScriptTree": {
+      "module": "ScriptTree.ScriptTree", 
+      "command": "main()", 
+      "option_box": "False", 
+      "language": "python"
+    }, 
+    "JSON Editor": {
+      "module": "JSON_Editor.main_ui", 
+      "command": "main()", 
+      "option_box": "False", 
+      "language": "python"
+    }
+  }
+}

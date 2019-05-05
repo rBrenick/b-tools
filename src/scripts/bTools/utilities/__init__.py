@@ -4,7 +4,8 @@ from bTools.utilities.modeling import *
 from bTools.utilities.hotkeys import *
 from bTools.utilities.general import *
 
-def reloadModules():
+
+def reload_modules():
     import sys
     reload(sys.modules.get("bTools.utilities.animation"))
     reload(sys.modules.get("bTools.utilities.rigging"))

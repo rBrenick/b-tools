@@ -1,29 +1,30 @@
 import pymel.core as pm
 
+
 class DefaultWindow(object):
-    def __init__(self, windowTitle="bToolsWindow"):
-        if pm.window(windowTitle, exists=True):
-            pm.deleteUI(windowTitle)
+    def __init__(self, window_title="bTools_window"):
+        if pm.window(window_title, exists=True):
+            pm.deleteUI(window_title)
             
-        self.win = pm.window(windowTitle)
+        self.win = pm.window(window_title)
         self.mainLayout = pm.verticalLayout()
-        self.setupUI()
-        self.createExecuteButtons()
+        self.setup_ui()
+        self.create_execute_buttons()
         self.win.show()
     
-    def createExecuteButtons(self):
-        horLayout = pm.rowLayout(numberOfColumns=3, parent=self.mainLayout)
-        pm.button(label='Setup', command=self.executeMain)
-        pm.button(label='Apply', command=self.executeApply)
+    def create_execute_buttons(self):
+        hor_layout = pm.rowLayout(numberOfColumns=3, parent=self.mainLayout)
+        pm.button(label='Setup', command=self.execute_main)
+        pm.button(label='Apply', command=self.execute_apply)
         pm.button(label='Close', command=self.close)
         
-    def setupUI(self):
+    def setup_ui(self):
         pass
         
-    def executeApply(self, *args):
+    def execute_apply(self, *args):
         self.main()
         
-    def executeMain(self, *args):
+    def execute_main(self, *args):
         self.main()
         self.close()
         

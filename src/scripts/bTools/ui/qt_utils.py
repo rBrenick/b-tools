@@ -1,57 +1,65 @@
 
 from cStringIO import StringIO
 import xml.etree.ElementTree as xml
-from Qt import QtCompat, QtWidgets, QtCore, QtGui
+
+# Not even going to pretend to have Maya 2016 support
+from PySide2 import QtCore
+from PySide2 import QtWidgets
+from PySide2 import QtGui
+from shiboken2 import wrapInstance
+from PySide2 import QtUiTools
 
 
-
-def getTopWindow():
-    return getMayaWindow()
-
-
-def getMayaWindow():
-    from maya import OpenMayaUI as omui
-    mayaMainWindowPtr = omui.MQtUtil().mainWindow()
-    mayaMainWindow = QtCompat.wrapInstance(long(mayaMainWindowPtr), QtWidgets.QWidget)
-    return mayaMainWindow
+def get_top_window():
+    return get_app_window()
 
 
-def launchExampleWindow():
-    # WORKS: Widget is fine
-    hello = QtWidgets.QLabel("Hello, World", parent=getMayaWindow())
+def get_app_window():
+    top_window = None
+    try:
+        from maya import OpenMayaUI as omui
+        maya_main_window_ptr = omui.MQtUtil().mainWindow()
+        top_window = wrapInstance(long(maya_main_window_ptr), QtWidgets.QMainWindow)
+    except ImportError, e:
+        pass
+    return top_window
+
+
+def launch_example_window():
+    hello = QtWidgets.QLabel("Hello, World", parent=get_app_window())
     hello.setObjectName('MyLabel')
     hello.setWindowFlags(QtCore.Qt.Window)  # Make this widget a standalone window even though it is parented
     hello.show()
     return hello
 
 
-def compileUIFile(uiFilePath=None):
-    pyPath = uiFilePath.replace(".ui", ".py")
-    with open(pyPath, 'w') as pyFile:
-        pysideuic.compileUi(uiFilePath, pyFile, False, 4, False)
+def compile_ui_file(ui_file_path=None):
+    py_path = ui_file_path.replace(".ui", ".py")
+    with open(py_path, 'w') as pyFile:
+        pysideuic.compileUi(ui_file_path, pyFile, False, 4, False)
 
 
-## REWRITE THIS
-def deleteWindow(object):
+def delete_window(window_class):
     for widget in QtWidgets.QApplication.instance().topLevelWidgets():
         if "__class__" in dir(widget):
-            if str(widget.__class__) == str(object.__class__):
+            if str(widget.__class__) == str(window_class.__class__):
                 widget.deleteLater()
                 widget.close()
 
 
 # Sorry
-def getQWidget(name, qType=QtWidgets.QWidget):
+def get_QWidget(name, q_type=QtWidgets.QWidget):
     import maya.OpenMayaUI as apiUI
 
-    dockPt = apiUI.MQtUtil.findControl(name)  # Find the pointer to the dock control
-    if dockPt is not None:
-        return QtCompat.wrapInstance(long(dockPt), qType)
+    dock_pt = apiUI.MQtUtil.findControl(name)  # Find the pointer to the dock control
+    if dock_pt is not None:
+        return wrapInstance(long(dock_pt), q_type)
     else:
         print("No control found for", name)
         return None
 
-def compileUi(*args, **kvargs):
+
+def compile_ui(*args, **kvargs):
     """ Run standard compileUi from eater PySide2 or PySide (dependence on which is available)"""
     try:
         import pyside2uic as pysideuic
@@ -59,8 +67,9 @@ def compileUi(*args, **kvargs):
         import pysideuic as pysideuic
 
     return pysideuic.compileUi(*args, **kvargs)
-    
-def loadUiType(uiFile):
+
+
+def load_ui_type(ui_file):
     """Pyside equivalent for the loadUiType function in PyQt.
     From the PyQt4 documentation:
         Load a Qt Designer .ui file and return a tuple of the generated form
@@ -77,15 +86,15 @@ def loadUiType(uiFile):
         tuple: the generated form class, the Qt base class
     """
 
-    parsed = xml.parse(uiFile)
+    parsed = xml.parse(ui_file)
     widget_class = parsed.find('widget').get('class')
     form_class = parsed.find('class').text
 
-    with open(uiFile, 'r') as f:
+    with open(ui_file, 'r') as f:
         o = StringIO()
         frame = {}
 
-        compileUi(f, o, indent=0)
+        compile_ui(f, o, indent=0)
         pyc = compile(o.getvalue(), '<string>', 'exec')
         exec pyc in frame
 
@@ -95,26 +104,26 @@ def loadUiType(uiFile):
     return form_class, base_class
                 
 
-class cameraWindow(QtWidgets.QDialog):
+class CameraWindow(QtWidgets.QDialog):
     """
     SOURCE: http://blog.virtualmethodstudio.com/2017/03/embed-maya-native-ui-objects-in-pyside2/
     """
-    def __init__(self, parent=getMayaWindow(), **kwargs):
-        super(cameraWindow, self).__init__(parent, **kwargs)
+    def __init__(self, parent=get_app_window(), **kwargs):
+        super(CameraWindow, self).__init__(parent, **kwargs)
         self.resize(500, 500)
 
-        qtLayout = QtWidgets.QVBoxLayout()
-        qtLayout.setObjectName('viewportLayout')
+        qt_layout = QtWidgets.QVBoxLayout()
+        qt_layout.setObjectName('viewportLayout')
 
         pm.setParent('viewportLayout')
-        paneLayoutName = pm.paneLayout()
+        pane_layout_name = pm.paneLayout()
 
-        modelPanel = pm.modelPanel("embeddedModelPanel#", cam='persp')
+        model_panel = pm.modelPanel("embeddedModelPanel#", cam='persp')
 
-        ptr = omui.MQtUtil.findControl(paneLayoutName)
-        paneLayoutQt = wrapInstance(long(ptr), QtWidgets.QWidget)
+        ptr = omui.MQtUtil.findControl(pane_layout_name)
+        pane_layout_qt = wrapInstance(long(ptr), QtWidgets.QWidget)
 
-        qtLayout.addWidget(paneLayoutQt)
+        qt_layout.addWidget(pane_layout_qt)
 
         self.show()
 

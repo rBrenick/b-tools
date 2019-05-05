@@ -3,7 +3,7 @@ import random
 import sys
 
 
-def resetTransform(nodes=None, translation=False, rotation=False, scale=False, allKeyable=False):
+def reset_transform(nodes=None, translation=False, rotation=False, scale=False, all_keyable=False):
     """
     Resets the transform values on the selected nodes
     """
@@ -24,57 +24,61 @@ def resetTransform(nodes=None, translation=False, rotation=False, scale=False, a
         if scale:
             attrs += ["scale"+axis for axis in "XYZ"]
         
-        for attrName in attrs:
-            if node.hasAttr(attrName) and node.getAttr(attrName, settable=True):
-                defaultValue = pm.attributeQuery(attrName, listDefault=True, node=node.name())[0]
-                node.setAttr(attrName, defaultValue)
+        for attr_name in attrs:
+            if node.hasAttr(attr_name) and node.getAttr(attr_name, settable=True):
+                default_value = pm.attributeQuery(attr_name, listDefault=True, node=node.name())[0]
+                node.setAttr(attr_name, default_value)
             
     return nodes
-    
-def resetTranslation():
-    resetTransform(translation=True)
 
-def resetRotation():
-    resetTransform(rotation=True)
 
-def resetScale():
-    resetTransform(scale=True)
+def reset_translation():
+    reset_transform(translation=True)
 
-def resetAttrs(node=None):
+
+def reset_rotation():
+    reset_transform(rotation=True)
+
+
+def reset_scale():
+    reset_transform(scale=True)
+
+
+def reset_attrs(node=None):
     if not node:
         for node in pm.selected():
-            resetAttrs(node)
+            reset_attrs(node)
         return
     
     attrs = []
-    selAttrs = pm.channelBox('mainChannelBox', q=True, selectedMainAttributes=True)
-    if selAttrs:
-        attrs += selAttrs
+    sel_attrs = pm.channelBox('mainChannelBox', q=True, selectedMainAttributes=True)
+    if sel_attrs:
+        attrs += sel_attrs
     
-    selAttrs = pm.channelBox('mainChannelBox', q=True, selectedShapeAttributes=True)
-    if selAttrs:
-        attrs += selAttrs
+    sel_attrs = pm.channelBox('mainChannelBox', q=True, selectedShapeAttributes=True)
+    if sel_attrs:
+        attrs += sel_attrs
         
-    selAttrs = pm.channelBox('mainChannelBox', q=True, selectedHistoryAttributes=True)
-    if selAttrs:
-        attrs += selAttrs
+    sel_attrs = pm.channelBox('mainChannelBox', q=True, selectedHistoryAttributes=True)
+    if sel_attrs:
+        attrs += sel_attrs
     
-    selAttrs = pm.channelBox('mainChannelBox', q=True, selectedOutputAttributes=True)
-    if selAttrs:
-        attrs += selAttrs
+    sel_attrs = pm.channelBox('mainChannelBox', q=True, selectedOutputAttributes=True)
+    if sel_attrs:
+        attrs += sel_attrs
         
-    keyableAttrs = [a.attrName() for a in node.listAttr(keyable=True, shortNames=True)]
+    keyable_attrs = [a.attrName() for a in node.listAttr(keyable=True, shortNames=True)]
     if not attrs:
-        attrs = keyableAttrs
+        attrs = keyable_attrs
     
     for attr in attrs:
-        if attr in keyableAttrs:
+        if attr in keyable_attrs:
             if node.getAttr(attr, settable=True):
-                defaultValue = pm.attributeQuery(attr, listDefault=True, node=node.name())[0]
-                node.setAttr(attr, defaultValue)
+                default_value = pm.attributeQuery(attr, listDefault=True, node=node.name())[0]
+                node.setAttr(attr, default_value)
 
             
-def resetAttrsOrBindPose():
+def reset_attrs_or_bind_pose():
     connections = []
     for node in pm.selected():
         connections += node.connections(type="skinCluster")
@@ -90,48 +94,48 @@ def resetAttrsOrBindPose():
         except StandardError, e:
             pass
     else:
-        resetAttrs()
+        reset_attrs()
     
     
-def toggleNurbsInViewport():
+def toggle_nurbs_in_viewport():
     """
     Toggles the visibility of NURBS Curves/Surfaces in the viewport
     """
-    focusedPanel = pm.getPanel(withFocus=True)
+    focused_panel = pm.getPanel(withFocus=True)
     
-    if "modelPanel" in focusedPanel:
-        currentState = pm.modelEditor(focusedPanel, q=True, nurbsCurves=True)
+    if "modelPanel" in focused_panel:
+        current_state = pm.modelEditor(focused_panel, q=True, nurbsCurves=True)
         
-        pm.modelEditor(focusedPanel, e=True, nurbsCurves=not currentState)
-        pm.modelEditor(focusedPanel, e=True, nurbsSurfaces=not currentState)
+        pm.modelEditor(focused_panel, e=True, nurbsCurves=not current_state)
+        pm.modelEditor(focused_panel, e=True, nurbsSurfaces=not current_state)
         
         
-def toggleControlsVisibility():
-    toggleNurbsInViewport()
+def toggle_controls_visibility():
+    toggle_nurbs_in_viewport()
     
     
-def frameRange():
+def get_frame_range():
     """
     Gets the selected frame range
     If nothing selected, gets the timeslider start end
     
-    :return [startFrame, endFrame]
+    :return [start_frame, end_frame]
     
     """
-    frameRange = [0, 1]
+    frame_range = [0, 1]
     
-    selectedFrameRangeSlider = pm.mel.eval('$temp=$gPlayBackSlider')
-    if pm.timeControl(selectedFrameRangeSlider, query=True, rangeVisible=True):
-        frameRange = pm.timeControl(selectedFrameRangeSlider, query=True, rangeArray=True)
+    selected_frame_range_slider = pm.mel.eval('$temp=$gPlayBackSlider')
+    if pm.timeControl(selected_frame_range_slider, query=True, rangeVisible=True):
+        frame_range = pm.timeControl(selected_frame_range_slider, query=True, rangeArray=True)
     else:
-        startFrame = pm.playbackOptions(query=True, min=True)
-        endFrame = pm.playbackOptions(query=True, max=True)
-        frameRange = [startFrame, endFrame]
+        start_frame = pm.playbackOptions(query=True, min=True)
+        end_frame = pm.playbackOptions(query=True, max=True)
+        frame_range = [start_frame, end_frame]
 
-    return frameRange
+    return frame_range
 
 
-def generateRandomVector(length=3, weights=(1, 1, 1)):
+def generate_random_vector(length=3, weights=(1, 1, 1)):
     """
     Creates a Vector of length with the weight values as min and max
     Defaults to a vec3

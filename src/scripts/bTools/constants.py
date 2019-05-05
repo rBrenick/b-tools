@@ -2,12 +2,15 @@
 class Module:
     name = "bTools"
 
+
 class Hotkeys:
-    utilsCmdForm = "import bTools.utilities; bTools.utilities.{}"
+    utils_cmd_form = "import bTools.utilities; bTools.utilities.{}"
+
 
 class MarkingMenus:
     category = Module.name+"_MarkingMenus"
-    cmdForm = "import bTools.ui.markingMenus; bTools.ui.markingMenus.{}"
+    cmd_form = "import bTools.ui.marking_menus; bTools.ui.marking_menus.{}"
+
 
 class OptionVars:
     SavedSelection = "bTools_SavedSelection"
