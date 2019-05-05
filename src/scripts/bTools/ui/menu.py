@@ -33,10 +33,9 @@ def create_menu():
 
 
 def setup_menu_item(item_name, item_data):
-    item_is_divider = item_name == "-----"
+    item_is_divider = item_data == "-----"
     if item_is_divider:
-        item_text = item_data
-        pm.menuItem(label=item_text, divider=True)
+        pm.menuItem(label=item_name, divider=True)
         return
 
     item_is_sub_menu = item_data.get("sub_menu", "False") == "True"

@@ -24,7 +24,28 @@
       "option_box": "True", 
       "language": "python"
     }, 
-    "-----": "Tools", 
+    "Animation": "-----", 
+    "Noise Generator": {
+      "module": "bTools.animation.noise_generator", 
+      "command": "run()", 
+      "option_box": "False", 
+      "language": "python"
+    }, 
+    "Modeling": "-----", 
+    "Soft Select To Poly Color": {
+      "module": "bTools.modeling.soft_select_to_poly_color", 
+      "command": "run()", 
+      "option_box": "False", 
+      "language": "python"
+    }, 
+    "Rigging": "-----", 
+    "Control Creator": {
+      "module": "bTools.rigging.control_creator", 
+      "command": "run()", 
+      "option_box": "False", 
+      "language": "python"
+    }, 
+    "Tools": "-----", 
     "ScriptTree": {
       "module": "ScriptTree.ScriptTree", 
       "command": "main()", 
