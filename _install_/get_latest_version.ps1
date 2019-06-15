@@ -31,7 +31,7 @@ function SafeRemove
 $USER_DOWNLOADS_FOLDER = "$env:userprofile\Downloads"
 
 $TOOL_GIT_REPO = "https://github.com/rBrenick/b-tools/archive/master.zip" # modify these after uploading the tool
-$UPDATE_PATHS = @("docs", "src", "README.md")
+$UPDATE_PATHS = @("docs", "b_tools", "README.md", "setup.py")
 
 $CURRENT_TOOL_FOLDER = (Get-Item -Path ".").FullName
 $CURRENT_b_tools = (Get-Item -Path ".").Name
