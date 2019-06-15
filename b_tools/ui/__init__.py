@@ -2,7 +2,7 @@ import pymel.core as pm
 
 
 class DefaultWindow(object):
-    def __init__(self, window_title="bTools_window"):
+    def __init__(self, window_title="b_tools_window"):
         if pm.window(window_title, exists=True):
             pm.deleteUI(window_title)
             

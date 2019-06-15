@@ -2,12 +2,13 @@
 Cheeky lil command if you don't want to restart maya the first time
 
 import sys
-tool_path = r"D:\Git\bTools\src\scripts"
+tool_path = r"D:\Git\b_tools\src\scripts"
 if tool_path not in sys.path:
     sys.path.append(tool_path)
 
-from bTools import bTools_UI
-bTools_UI.main()
+from b_tools import b_tools_UI
+b_tools_UI.main()
+
 
 
 

@@ -1,9 +1,9 @@
 import pymel.core as pm
-import bTools.constants as k
+import b_tools.constants as k
 
-import bTools.ui as bt_ui
+import b_tools.ui as bt_ui
 reload(bt_ui)
-from bTools.ui import marking_menus
+from b_tools.ui import marking_menus
 reload(marking_menus)
 
 
@@ -11,7 +11,7 @@ def create_hotkey(command_hotkey, command=None, name=None, mel=False, maya_defau
     # prev_cmd = pm.hotkey(cmdHotkey, query=True, name=True)
     nice_name_hotkey = command_hotkey
     if pm.hotkeySet(q=True, current=True) == "Maya_Default":
-        pm.hotkeySet("bTools", current=True, source='Maya_Default')
+        pm.hotkeySet("b_tools", current=True, source='Maya_Default')
 
     if not name:
         name = command.split(".")[-1]

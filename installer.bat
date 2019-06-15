@@ -2,17 +2,17 @@
 :BEGIN
 CLS
 
-ECHO Welcome to bTools
-ECHO Here are the options for install
+ECHO Welcome to b_tools
+ECHO Here are the options
 ECHO.
 
 
-ECHO 1. Install
-ECHO 2. Uninstall
-ECHO 3. Get Latest version of tool
+ECHO    1 = Install
+ECHO    2 = Uninstall
+ECHO    3 = Get Latest version of tool
 ECHO.
 ECHO Advanced:
-ECHO 4. Make New Tool from bTools
+ECHO    4 = Make New Tool from b_tools
 
 ECHO.
 SET /P AREYOUSURE=Choice: 
@@ -40,4 +40,5 @@ Powershell.exe -executionpolicy remotesigned -File  _install_\create_new_tool.ps
 
 :END
 PAUSE
+
 

@@ -1,5 +1,5 @@
-# bTools
-import bTools.constants as k
+# b_tools
+import b_tools.constants as k
 
 import pymel.core as pm
 

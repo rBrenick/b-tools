@@ -1,7 +1,7 @@
 import pymel.core as pm
 import sys
 import re
-import bTools.constants as k
+import b_tools.constants as k
 
 """
 

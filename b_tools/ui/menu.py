@@ -5,14 +5,14 @@ import collections
 
 import pymel.core as pm
 from maya import cmds
-import bTools.constants as k
+import b_tools.constants as k
 
 
 MENU_NAME = k.Module.name
 MAYA_MENU_JSON = os.path.join(os.path.dirname(__file__), "maya_menu.json")
 
 
-def create_command(path="bTools", command="main()"):
+def create_command(path="b_tools", command="main()"):
     return 'exec("import {modulePath}; reload({modulePath}); {modulePath}.{cmd}")'.format(modulePath=path, cmd=command)
 
 
@@ -29,7 +29,7 @@ def create_menu():
     for item_name, item_data in all_menu_data.get("menu_items", {}).items():
         setup_menu_item(item_name, item_data)
 
-    print("bTools menu built")
+    print("b_tools menu built")
 
 
 def setup_menu_item(item_name, item_data):
@@ -63,7 +63,7 @@ def setup():
     if pm.menu(MENU_NAME, q=True, exists=True):
         cmds.evalDeferred('cmds.deleteUI("' + MENU_NAME + '")')
 
-    cmds.evalDeferred('import bTools.ui.menu; bTools.ui.menu.create_menu()')
+    cmds.evalDeferred('import b_tools.ui.menu; b_tools.ui.menu.create_menu()')
 
 
 def delete_menu(menu_name=MENU_NAME):

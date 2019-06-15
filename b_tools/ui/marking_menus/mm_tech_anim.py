@@ -1,7 +1,7 @@
-# bTools
+# b_tools
 
 import pymel.core as pm
-import bTools.constants as k
+import b_tools.constants as k
 
 
 MENU_NAME = "TechAnim_markingMenu"

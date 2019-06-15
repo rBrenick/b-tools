@@ -30,14 +30,14 @@ function SafeRemove
 # Lotsa variables
 $USER_DOWNLOADS_FOLDER = "$env:userprofile\Downloads"
 
-$TOOL_GIT_REPO = "https://github.com/rBrenick/bTools/archive/master.zip" # modify these after uploading the tool
+$TOOL_GIT_REPO = "https://github.com/rBrenick/b-tools/archive/master.zip" # modify these after uploading the tool
 $UPDATE_PATHS = @("docs", "src", "README.md")
 
 $CURRENT_TOOL_FOLDER = (Get-Item -Path ".").FullName
-$CURRENT_bTools = (Get-Item -Path ".").Name
+$CURRENT_b_tools = (Get-Item -Path ".").Name
 
-$NEW_VERSION_ZIP = $USER_DOWNLOADS_FOLDER + "\" + $CURRENT_bTools + "_update.zip"
-$NEW_VERSION_ZIP_FOLDER = $USER_DOWNLOADS_FOLDER + "\" + $CURRENT_bTools + "_update"
+$NEW_VERSION_ZIP = $USER_DOWNLOADS_FOLDER + "\" + $CURRENT_b_tools + "_update.zip"
+$NEW_VERSION_ZIP_FOLDER = $USER_DOWNLOADS_FOLDER + "\" + $CURRENT_b_tools + "_update"
 
 SafeRemove $NEW_VERSION_ZIP
 SafeRemove $NEW_VERSION_ZIP_FOLDER
@@ -78,7 +78,7 @@ foreach ($element in $UPDATE_PATHS) {
 # Copy new directories
 foreach ($element in $UPDATE_PATHS) {
     # Since it's the latest version it will have -master suffix in the folder name
-    $src_file_path = "$NEW_VERSION_ZIP_FOLDER\$CURRENT_bTools-master\$element"
+    $src_file_path = "$NEW_VERSION_ZIP_FOLDER\$CURRENT_b_tools-master\$element"
     $tgt_file_path = "$CURRENT_TOOL_FOLDER\$element"
     
     echo "Copying new $tgt_file_path"
@@ -97,6 +97,7 @@ SafeRemove $NEW_VERSION_ZIP_FOLDER
 # Update Complete
 echo ""
 echo "Update complete. Please restart Maya"
+
 
 
 

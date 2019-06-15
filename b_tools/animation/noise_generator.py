@@ -10,7 +10,7 @@ import random as rand
 """
 ex:
 
-from bTools.animation import noise_generator; noise_generator.run()
+from b_tools.animation import noise_generator; noise_generator.run()
 
 
 """

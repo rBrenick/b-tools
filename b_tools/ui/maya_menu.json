@@ -6,54 +6,54 @@
     "UI": {
       "sub_menu": "True", 
       "Rebuild Menu": {
-        "module": "bTools.ui.menu", 
+        "module": "b_tools.ui.menu", 
         "command": "setup()", 
         "option_box": "False", 
         "language": "python"
       }
     }, 
     "Setup Hotkeys": {
-      "module": "bTools.utilities.hotkeys", 
+      "module": "b_tools.utilities.hotkeys", 
       "command": "setup_default_hotkeys()", 
       "option_box": "False", 
       "language": "python"
     }, 
     "Setup Hotkeys OptionBox": {
-      "module": "bTools.utilities.hotkeys", 
+      "module": "b_tools.utilities.hotkeys", 
       "command": "show_hotkey_options_menu()", 
       "option_box": "True", 
       "language": "python"
     }, 
     "Animation": "-----", 
     "Noise Generator": {
-      "module": "bTools.animation.noise_generator", 
+      "module": "b_tools.animation.noise_generator", 
       "command": "run()", 
       "option_box": "False", 
       "language": "python"
     }, 
     "Modeling": "-----", 
     "Soft Select To Poly Color": {
-      "module": "bTools.modeling.soft_select_to_poly_color", 
+      "module": "b_tools.modeling.soft_select_to_poly_color", 
       "command": "run()", 
       "option_box": "False", 
       "language": "python"
     }, 
     "Rigging": "-----", 
     "Control Creator": {
-      "module": "bTools.rigging.control_creator", 
+      "module": "b_tools.rigging.control_creator", 
       "command": "run()", 
       "option_box": "False", 
       "language": "python"
     }, 
     "Tools": "-----", 
     "ScriptTree": {
-      "module": "ScriptTree.ScriptTree", 
+      "module": "script_tree", 
       "command": "main()", 
       "option_box": "False", 
       "language": "python"
     }, 
     "JSON Editor": {
-      "module": "JSON_Editor.main_ui", 
+      "module": "json_editor", 
       "command": "main()", 
       "option_box": "False", 
       "language": "python"
