@@ -85,13 +85,13 @@ def reset_attrs_or_bind_pose():
         try:
             if node.getShape():
                 connections += node.getShape().connections(type="skinCluster")
-        except StandardError, e:
+        except Exception as e:
             pass
             
     if connections:
         try:
             pm.mel.gotoBindPose()
-        except StandardError, e:
+        except Exception as e:
             pass
     else:
         reset_attrs()

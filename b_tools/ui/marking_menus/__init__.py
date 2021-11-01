@@ -4,7 +4,6 @@ import b_tools.constants as k
 import pymel.core as pm
 
 from . import mm_tech_anim
-reload(mm_tech_anim)
 
 
 def create_marking_menu_command(rtc, command):
@@ -24,7 +23,6 @@ def setup_tech_anim_marking_menu(key="t"):
 
 
 def tech_anim_marking_menu_press():
-    reload(mm_tech_anim)
     mm_tech_anim.remove_old_marking_menu()
     mm_tech_anim.Markingmenu()
 

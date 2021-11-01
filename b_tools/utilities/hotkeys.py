@@ -2,9 +2,7 @@ import pymel.core as pm
 import b_tools.constants as k
 
 import b_tools.ui as bt_ui
-reload(bt_ui)
 from b_tools.ui import marking_menus
-reload(marking_menus)
 
 
 def create_hotkey(command_hotkey, command=None, name=None, mel=False, maya_default=False):
@@ -49,7 +47,7 @@ def create_hotkey(command_hotkey, command=None, name=None, mel=False, maya_defau
         
     hotkey_params["keyShortcut"] = command_hotkey.lower()
     pm.hotkey(**hotkey_params)
-    print "       {}        {}".format(nice_name_hotkey, rtc)
+    print("       {}        {}".format(nice_name_hotkey, rtc))
 
 
 class HotkeyOptionsMenu(bt_ui.DefaultWindow):
@@ -169,7 +167,7 @@ def setup_modeling_hotkeys():
     
 def setup_default_hotkeys():
 
-    print "#"*40
+    print("#"*40)
     
     if pm.optionVar.get(HotkeyOptionsMenu.kSetupGeneralHotkeys, True):
         print("    "+k.Module.name+": General Hotkeys Setup")

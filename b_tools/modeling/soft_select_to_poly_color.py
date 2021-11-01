@@ -66,7 +66,7 @@ def softSelectPaint(rgbMult=(1, 1, 1), useMayaAPI=True, asAlpha=False):
     currentAlphaValues = {}
     try:
         polyColorList = pm.polyColorPerVertex(weights.keys(), q=True, rgb=True)
-    except StandardError:
+    except Exception as e:
         # Paint some if unable to find any
         pm.select(weights.keys())
         pm.mel.eval("polyColorPerVertex -r 0 -g 0 -b 0 -a 1 -cdo;")

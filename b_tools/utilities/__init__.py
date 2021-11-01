@@ -7,6 +7,7 @@ from b_tools.utilities.general import *
 
 def reload_modules():
     import sys
+    from importlib import reload
     reload(sys.modules.get("b_tools.utilities.animation"))
     reload(sys.modules.get("b_tools.utilities.rigging"))
     reload(sys.modules.get("b_tools.utilities.modeling"))

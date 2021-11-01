@@ -13,7 +13,7 @@ MAYA_MENU_JSON = os.path.join(os.path.dirname(__file__), "maya_menu.json")
 
 
 def create_command(path="b_tools", command="main()"):
-    return 'exec("import {modulePath}; reload({modulePath}); {modulePath}.{cmd}")'.format(modulePath=path, cmd=command)
+    return 'exec("import {modulePath}; {modulePath}.{cmd}")'.format(modulePath=path, cmd=command)
 
 
 def read_menu_json():
