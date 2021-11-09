@@ -114,6 +114,7 @@ def setup_general_hotkeys():
     create_hotkey("Ctrl+Shift+E", command="Export;", name="ExportAll", mel=True)
     create_hotkey("Ctrl+R", command=k.Hotkeys.utils_cmd_form.format("open_reference_editor()"), name="OpenRefEditor")
     create_hotkey("N", command="namespaceEditor;", name="OpenNamespaceEditor", mel=True)
+    create_hotkey("I", command="Import;", name="OpenImportBrowser", mel=True)
     
     # Selection
     create_hotkey("HOME", command=k.Hotkeys.utils_cmd_form.format("save_selection()"), name="SaveSelection")
