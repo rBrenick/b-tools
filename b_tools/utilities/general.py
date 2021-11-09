@@ -49,3 +49,9 @@ def export_all_to_same_name():
     pm.mel.eval('file -force -options "v=0;" -type "FBX export" -pr -ea "{}";'.format(fbx_path))
     sys.stdout.write("Exported FBX: {}\n".format(fbx_path))
 
+
+def open_reference_editor():
+    if pm.ls(type="reference"):
+        pm.mel.ReferenceEditor()
+    else:
+        pm.mel.CreateReference()

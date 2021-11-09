@@ -112,6 +112,8 @@ def setup_general_hotkeys():
     create_hotkey("Ctrl+DOWN", command="SelectHierarchy;", name="SelHierarchy", mel=True)
     create_hotkey("Ctrl+E", command="ExportSelection;", name="ExportSel", mel=True)
     create_hotkey("Ctrl+Shift+E", command="Export;", name="ExportAll", mel=True)
+    create_hotkey("Ctrl+R", command=k.Hotkeys.utils_cmd_form.format("open_reference_editor()"), name="OpenRefEditor")
+    create_hotkey("N", command="namespaceEditor;", name="OpenNamespaceEditor", mel=True)
     
     # Selection
     create_hotkey("HOME", command=k.Hotkeys.utils_cmd_form.format("save_selection()"), name="SaveSelection")
@@ -125,9 +127,13 @@ def setup_animation_hotkeys():
     create_hotkey("Alt+E", command=k.Hotkeys.utils_cmd_form.format("reset_rotation()"), name="ResetRotation")
     create_hotkey("Alt+R", command=k.Hotkeys.utils_cmd_form.format("reset_scale()"), name="ResetScale")
     create_hotkey("Alt+C", command=k.Hotkeys.utils_cmd_form.format("toggle_controls_visibility()"), name="ToggleControlsVisibility")
-    
-    create_hotkey("Ctrl+C", command=k.Hotkeys.utils_cmd_form.format("copy_vertex_weight_or_key()"), name="CopyVertexWeightOrKey")
-    create_hotkey("Ctrl+V", command=k.Hotkeys.utils_cmd_form.format("paste_vertex_weight_or_key()"), name="PasteVertexWeightOrKey")
+    try:
+        import copy_paste_overload.copy_paste_overload_system as cpos
+        cpos.overload_copy_paste("clipboard_skinning")
+    except Exception as e:
+        print(e)        
+        create_hotkey("Ctrl+C", command=k.Hotkeys.utils_cmd_form.format("copy_vertex_weight_or_key()"), name="CopyVertexWeightOrKey")
+        create_hotkey("Ctrl+V", command=k.Hotkeys.utils_cmd_form.format("paste_vertex_weight_or_key()"), name="PasteVertexWeightOrKey")
 
     
 def setup_rigging_hotkeys():
