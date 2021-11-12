@@ -404,7 +404,7 @@ def delete_history_or_remove_skinning():
         
     else:
         pm.mel.DeleteHistory()
-        
+
         for node in pm.selected(type="transform"):
             try:
                 for attr in node.listAttr(keyable=True):
