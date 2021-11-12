@@ -1,7 +1,9 @@
-import pymel.core as pm
-import sys
 import re
+import sys
+import traceback
+
 import b_tools.constants as k
+import pymel.core as pm
 
 """
 
@@ -403,7 +405,19 @@ def delete_history_or_remove_skinning():
     else:
         pm.mel.DeleteHistory()
         
-        
+        for node in pm.selected(type="transform"):
+            try:
+                for attr in node.listAttr(keyable=True):
+                    attr.unlock()
+
+                intermediate_shapes = [s for s in node.getShapes() if s.intermediateObject.get()]
+                if intermediate_shapes:
+                    pm.delete(intermediate_shapes)
+
+            except Exception as e:
+                traceback.print_exc()
+
+
 def increase_manipulator_size_or_increment_select_vertices_below_positive():
     if is_skinning():
         increment_select_vertices_below()
