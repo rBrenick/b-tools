@@ -13,7 +13,10 @@ def create_hotkey(command_hotkey, command=None, name=None, mel=False, maya_defau
 
     if not name:
         name = command.split(".")[-1]
-        
+
+    # add prefix to name commands (to prevent collision)
+    name = "bt_{}".format(name)
+
     if maya_default:
         nc = name
     else:
@@ -47,7 +50,7 @@ def create_hotkey(command_hotkey, command=None, name=None, mel=False, maya_defau
         
     hotkey_params["keyShortcut"] = command_hotkey.lower()
     pm.hotkey(**hotkey_params)
-    print("       {}        {}".format(nice_name_hotkey, rtc))
+    print("       {}        {}".format(nice_name_hotkey, nc))
 
 
 class HotkeyOptionsMenu(bt_ui.DefaultWindow):
@@ -127,6 +130,7 @@ def setup_animation_hotkeys():
     create_hotkey("Alt+W", command=k.Hotkeys.utils_cmd_form.format("reset_translation()"), name="ResetTranslation")
     create_hotkey("Alt+E", command=k.Hotkeys.utils_cmd_form.format("reset_rotation()"), name="ResetRotation")
     create_hotkey("Alt+R", command=k.Hotkeys.utils_cmd_form.format("reset_scale()"), name="ResetScale")
+    create_hotkey("Alt+D", command=k.Hotkeys.utils_cmd_form.format("delete_selected_keys()"), name="DeleteSelectedKeys")
     create_hotkey("Alt+C", command=k.Hotkeys.utils_cmd_form.format("toggle_controls_visibility()"), name="ToggleControlsVisibility")
     try:
         import copy_paste_overload.copy_paste_overload_system as cpos
