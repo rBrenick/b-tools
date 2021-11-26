@@ -33,6 +33,7 @@ class Markingmenu():
         # Create - Submenu
         sub_menu = pm.menuItem(p=menu, label="Create", rp="SW", image="bt_Add.png", subMenu=1)
         pm.menuItem(p=sub_menu, label="Locator", rp="N", image="locator.png", command=k.Hotkeys.utils_cmd_form.format("create_locator_around_selected()"))
+        pm.menuItem(p=sub_menu, label="Create Offset Group", rp="SW", image="transform.svg", command=k.Hotkeys.utils_cmd_form.format("create_offset_grp()"))
         pm.menuItem(p=sub_menu, label="Joint", rp="W", image="kinJoint.png", command=k.Hotkeys.utils_cmd_form.format("create_single_joint()"))
         pm.menuItem(p=sub_menu, label="Joint Chain", rp="NW", image="kinJoint.png", command="JointTool", sourceType="mel")
         pm.menuItem(p=sub_menu, label="Control", rp="S", image="circle.png", command=k.Hotkeys.utils_cmd_form.format("create_ctrl()"))
