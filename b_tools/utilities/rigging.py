@@ -172,30 +172,45 @@ def get_average_and_last_component_pos(components=None):
 
 
 def create_locator_around_selected():
-    if component_is_selected():
-        average_pos, last_pos = get_average_and_last_component_pos()
-        loc = pm.spaceLocator()
-        set_position_and_aim(loc, average_pos, last_pos)
-    else:
-        sel_transforms = pm.selected(type="transform")
-        loc = pm.spaceLocator()
-        loc.rename(get_unique_name(sel_transforms[0].name() + "_LOC"))
-        consts = []
-        for node in sel_transforms:
-            consts.append(pm.parentConstraint(node, loc))
-        pm.delete(consts)
-
+    loc = create_node_around_selection("locator")
     return loc
 
 
 def create_single_joint():
-    average_pos, last_pos = get_average_and_last_component_pos()
-    jnt = pm.joint()
+    jnt = create_node_around_selection("joint")
     jnt.rename("Left")
     jnt.setAttr("jointOrientX", keyable=True)
     jnt.setAttr("jointOrientY", keyable=True)
     jnt.setAttr("jointOrientZ", keyable=True)
-    set_position_and_aim(jnt, average_pos, last_pos)
+    return jnt
+
+
+def create_node_around_selection(node_type="transform"):
+    def create_node():
+        _node = pm.createNode(node_type)
+        if node_type == "locator":
+            _node = _node.getParent()
+        return _node
+
+    if component_is_selected():
+        average_pos, last_pos = get_average_and_last_component_pos()
+        node = create_node()
+        set_position_and_aim(node, average_pos, last_pos)
+    else:
+        sel_transforms = pm.selected(type="transform")
+        node = create_node()
+        if sel_transforms:
+            node.rename(get_unique_name(sel_transforms[0].name() + "_LOC"))
+
+            consts = []
+            for sel_node in sel_transforms:
+                consts.append(pm.parentConstraint(sel_node, node))
+
+            node_matrix = node.getMatrix()
+            pm.delete(consts)
+            node.setMatrix(node_matrix)
+
+    return node
 
 
 def set_position_and_aim(node, average_pos, last_pos):
