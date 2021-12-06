@@ -1,6 +1,7 @@
 import random
 import sys
 
+from maya import cmds
 import pymel.core as pm
 
 
@@ -123,13 +124,13 @@ def toggle_nurbs_in_viewport():
     """
     Toggles the visibility of NURBS Curves/Surfaces in the viewport
     """
-    focused_panel = pm.getPanel(withFocus=True)
+    focused_panel = cmds.getPanel(withFocus=True)
 
     if "modelPanel" in focused_panel:
-        current_state = pm.modelEditor(focused_panel, q=True, nurbsCurves=True)
+        current_state = cmds.modelEditor(focused_panel, q=True, nurbsCurves=True)
 
-        pm.modelEditor(focused_panel, e=True, nurbsCurves=not current_state)
-        pm.modelEditor(focused_panel, e=True, nurbsSurfaces=not current_state)
+        cmds.modelEditor(focused_panel, e=True, nurbsCurves=not current_state)
+        cmds.modelEditor(focused_panel, e=True, nurbsSurfaces=not current_state)
 
 
 def toggle_controls_visibility():
