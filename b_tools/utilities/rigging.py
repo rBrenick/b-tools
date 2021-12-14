@@ -349,21 +349,20 @@ def increment_scale_selected_curve(positive=True):
 # Display
 
 def toggle_joints_in_viewport():
-    focused_panel = pm.getPanel(withFocus=True)
+    focused_panel = cmds.getPanel(withFocus=True)
 
     if "modelPanel" in focused_panel:
-        set_value = not pm.modelEditor(focused_panel, q=True, joints=True)
-        pm.modelEditor(focused_panel, e=True, joints=set_value)
+        set_value = not cmds.modelEditor(focused_panel, q=True, joints=True)
+        cmds.modelEditor(focused_panel, e=True, joints=set_value)
 
 
 def toggle_joints_x_ray():
-    focused_panel = pm.getPanel(withFocus=True)
+    focused_panel = cmds.getPanel(withFocus=True)
 
     if "modelPanel" in focused_panel:
-        set_value = not pm.modelEditor(focused_panel, q=True, jointXray=True)
-        pm.modelEditor(focused_panel, e=True, jointXray=set_value)
-        if set_value:
-            pm.modelEditor(focused_panel, e=True, joints=set_value)
+        set_value = not cmds.modelEditor(focused_panel, q=True, jointXray=True)
+        cmds.modelEditor(focused_panel, e=True, jointXray=set_value)
+        cmds.modelEditor(focused_panel, e=True, joints=True)
 
 
 # Skinning
