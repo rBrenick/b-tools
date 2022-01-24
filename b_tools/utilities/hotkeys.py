@@ -146,7 +146,7 @@ def setup_rigging_hotkeys():
     create_hotkey("Alt+J", command=k.Hotkeys.utils_cmd_form.format("toggle_joints_in_viewport()"), name="ToggleJointsVisibility")
     create_hotkey("Alt+N", command=k.Hotkeys.utils_cmd_form.format("toggle_joints_x_ray()"), name="ToggleJointsXRay")
     create_hotkey("+", command=k.Hotkeys.utils_cmd_form.format("increase_manipulator_size_or_increment_select_vertices_below_positive()"), name="increaseManipSize_Or_SelectVertivesBelowPos")
-    create_hotkey("-", command=k.Hotkeys.utils_cmd_form.format("decrease_manipulatorSize_Or_IncrementSelectVerticesBelow_Negative()"), name="decreaseManipSize_Or_SelectVertivesBelowNeg")
+    create_hotkey("-", command=k.Hotkeys.utils_cmd_form.format("decrease_manipulator_size_or_increment_select_vertices_below_negative()"), name="decreaseManipSize_Or_SelectVertivesBelowNeg")
     create_hotkey("Ctrl++", command=k.Hotkeys.utils_cmd_form.format("increment_scale_selected_curve()"), name="ScaleCurvePositive")
     create_hotkey("Ctrl+-", command=k.Hotkeys.utils_cmd_form.format("increment_scale_selected_curve(positive=False)"), name="ScaleCurveNegative")
     

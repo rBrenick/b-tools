@@ -88,9 +88,9 @@ def create_ctrl(node=None):
     ctrl_name = get_unique_name(tgt + "_CTRL")
     ctrl = pm.circle(normal=[1, 0, 0], name=ctrl_name)[0]
     offset_grp = pm.group(empty=True, name=ctrl_name + "_offsetGrp")
-    spaces_grp = pm.group(empty=True, name=ctrl_name + "_spacesGrp")
-    spaces_grp.setParent(offset_grp)
-    ctrl.setParent(spaces_grp)
+    # spaces_grp = pm.group(empty=True, name=ctrl_name + "_spacesGrp")
+    # spaces_grp.setParent(offset_grp)
+    ctrl.setParent(offset_grp)
     if node:
         pm.matchTransform(offset_grp, tgt)
         pm.parentConstraint(ctrl, tgt)
