@@ -527,3 +527,19 @@ def increment_select_vertices_below(positive=True):
 
     pm.optionVar[k.OptionVars.SelectVerticesBelowInfluence] = weight_value
     sys.stdout.write("SelectVerticesBelowInfluence set to: {}\n".format(weight_value))
+
+
+def skin_to_selected_joints():
+    joint_in_sel = pm.ls(sl=True, type="joint")[0]
+    meshes_in_sel = [x for x in pm.ls(sl=True, type="transform") if x != joint_in_sel]
+
+    for mesh in meshes_in_sel:
+        skin_cluster = pm.mel.findRelatedSkinCluster(mesh)
+        if not skin_cluster:
+            skin_cluster = pm.skinCluster(joint_in_sel, mesh, toSelectedBones=True)
+
+        if joint_in_sel not in pm.skinCluster(skin_cluster, query=True, influence=True):
+            pm.skinCluster(skin_cluster, edit=True, addInfluence=joint_in_sel, weight=0, lockWeights=True)
+
+        # skin it to the joint
+        pm.skinPercent(skin_cluster, mesh, transformValue=[joint_in_sel, 1], normalize=True)

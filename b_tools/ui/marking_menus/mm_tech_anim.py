@@ -49,20 +49,15 @@ class Markingmenu():
         # Skinning List
         # pm.menuItem(p=menu, image="mayaIcon.png")
         # pm.menuItem(p=menu, label="Skinning Commands", boldFont=True, enable=False)
+        pm.menuItem(p=menu, label="Skin to Joint", image="addWrapInfluence.png", command=k.Hotkeys.utils_cmd_form.format("skin_to_selected_joints()"))
         pm.menuItem(p=menu, label="Add Influence", image="addWrapInfluence.png", command='pm.mel.skinClusterInfluence(1, "-lw false -wt 0")')
-        
         pm.menuItem(p=menu, label="Move Influences", image="removeWrapInfluence.png", command="RemoveInfluence", sourceType="mel", enable=False)
-        
         pm.menuItem(p=menu, label="Move Skinned Joints", image="moveSkinnedJoint.png", command="MoveSkinJointsTool", sourceType="mel")
-        
         pm.menuItem(p=menu, label="Label Joints by Name", command="labelJointsBasedOnNames", image="menuIconSkeletons.png", sourceType="mel")
-        
         pm.menuItem(p=menu, label="Mirror Skin Weights", image="mirrorSkinWeight.png", command="MirrorSkinWeights", sourceType="mel")
         pm.menuItem(p=menu, label="Mirror Skin Weights Options", optionBox=True, command="MirrorSkinWeightsOptions", sourceType="mel")
-        
         pm.menuItem(p=menu, label="Copy Skin Weights", image="copySkinWeight.png", command="CopySkinWeights", sourceType="mel")
         pm.menuItem(p=menu, label="Copy Skin Weights Options", optionBox=True, command="CopySkinWeightsOptions", sourceType="mel")
-        
         pm.menuItem(p=menu, label="Bind Skin", image="smoothSkin.png", command="SmoothBindSkin", sourceType="mel")
         pm.menuItem(p=menu, label="Bind Skin Options", optionBox=True, command="SmoothBindSkinOptions", sourceType="mel")
         
