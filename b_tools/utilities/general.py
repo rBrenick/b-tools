@@ -1,9 +1,14 @@
-
+import json
+import os.path
 import sys
 
 import pymel.core as pm
 import b_tools.constants as k
 from maya import cmds
+
+SELECTION_SAVE_JSON = "c:/tmp/saved_selection_maya.json"
+if not os.path.exists(os.path.dirname(SELECTION_SAVE_JSON)):
+    os.makedirs(os.path.dirname(SELECTION_SAVE_JSON))
 
 
 def move_to_origo(node=None):
@@ -24,19 +29,32 @@ def move_to_origo_or_weight_hammer():
 
 
 def save_selection():
-    pm.optionVar[k.OptionVars.SavedSelection] = cmds.ls(sl=True)
+    with open(SELECTION_SAVE_JSON, "w") as fp:
+        json.dump(cmds.ls(sl=True, flatten=True), fp, indent=2)
 
 
 def select_saved_selection():
-    saved_sel = pm.optionVar.get(k.OptionVars.SavedSelection)
-    if saved_sel:
-        cmds.select(saved_sel, add=True)
+    with open(SELECTION_SAVE_JSON, "r") as fp:
+        saved_sel = json.load(fp)
+
+    existing_saved_sel = [sel for sel in saved_sel if cmds.objExists(sel)]
+    if not existing_saved_sel:
+        cmds.warning("Could not find any existing objects in the scene matching the saved selection.")
+        return
+
+    cmds.select(existing_saved_sel, add=True)
 
 
 def deselect_saved_selection():
-    saved_sel = pm.optionVar.get(k.OptionVars.SavedSelection)
-    if saved_sel:
-        cmds.select(saved_sel, deselect=True)
+    with open(SELECTION_SAVE_JSON, "r") as fp:
+        saved_sel = json.load(fp)
+
+    existing_saved_sel = [sel for sel in saved_sel if cmds.objExists(sel)]
+    if not existing_saved_sel:
+        cmds.warning("Could not find any existing objects in the scene matching the saved selection.")
+        return
+
+    cmds.select(existing_saved_sel, deselect=True)
 
         
 def export_all_to_same_name():
