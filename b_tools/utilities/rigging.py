@@ -6,6 +6,8 @@ import b_tools.constants as k
 import pymel.core as pm
 from maya import cmds
 
+from . import general as bgen
+
 """
 
 # Examples
@@ -147,7 +149,7 @@ def chunks(lst, n):
 
 def get_average_position_of_components(components=None):
     if components is None:
-        components = get_selected_components()
+        components = bgen.get_selected_components()
 
     positions = []
     for comp in components:
@@ -162,7 +164,7 @@ def get_average_position_of_components(components=None):
 
 def get_average_and_last_component_pos(components=None):
     if components is None:
-        components = get_selected_components()
+        components = bgen.get_selected_components()
 
     average_pos = get_average_position_of_components(components)
 
@@ -192,7 +194,7 @@ def create_node_around_selection(node_type="transform"):
             _node = _node.getParent()
         return _node
 
-    if component_is_selected():
+    if bgen.component_is_selected():
         average_pos, last_pos = get_average_and_last_component_pos()
         node = create_node()
         set_position_and_aim(node, average_pos, last_pos)
@@ -260,23 +262,6 @@ def is_skinning():
     if pm.contextInfo(ctx, q=True, c=True) == "artAttrSkin":
         return True
     return False
-
-
-class ComponentTypes:
-    vertex = 31
-    edges = 32
-    faces = 34
-
-
-def component_is_selected():
-    return any(get_selected_components())
-
-
-def get_selected_components():
-    selected_verts = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.vertex) or []
-    selected_edges = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.edges) or []
-    selected_faces = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.faces) or []
-    return selected_verts + selected_edges + selected_faces
 
 
 def freeze_translation():
@@ -368,14 +353,14 @@ def toggle_joints_x_ray():
 # Skinning
 
 def copy_vertex_weight_or_key():
-    if component_is_selected():
+    if bgen.component_is_selected():
         pm.mel.artAttrSkinWeightCopy()
     else:
         pm.mel.timeSliderCopyKey()
 
 
 def paste_vertex_weight_or_key():
-    if component_is_selected():
+    if bgen.component_is_selected():
         pm.mel.artAttrSkinWeightPaste()
     else:
         pm.mel.timeSliderPasteKey(False)

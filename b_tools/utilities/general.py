@@ -21,11 +21,10 @@ def move_to_origo(node=None):
     
 
 def move_to_origo_or_weight_hammer():
-    selected_components = filter(lambda x: isinstance(x, (pm.MeshVertex, pm.MeshEdge, pm.MeshFace)), pm.selected())
-    if not selected_components:
-        move_to_origo()
-    else:
+    if component_is_selected():
         pm.mel.weightHammerVerts()
+    else:
+        move_to_origo()
 
 
 def save_selection():
@@ -73,3 +72,20 @@ def open_reference_editor():
         pm.mel.ReferenceEditor()
     else:
         pm.mel.CreateReference()
+
+
+class ComponentTypes:
+    vertex = 31
+    edges = 32
+    faces = 34
+
+
+def component_is_selected():
+    return any(get_selected_components())
+
+
+def get_selected_components():
+    selected_verts = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.vertex) or []
+    selected_edges = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.edges) or []
+    selected_faces = cmds.filterExpand(expand=True, selectionMask=ComponentTypes.faces) or []
+    return selected_verts + selected_edges + selected_faces
