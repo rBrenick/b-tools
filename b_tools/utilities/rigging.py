@@ -459,16 +459,15 @@ def delete_history_or_remove_skinning():
         pm.mel.DeleteHistory()
 
         for node in pm.selected(type="transform"):
-            try:
-                for attr in node.listAttr(keyable=True):
+            for attr in node.listAttr(keyable=True):
+                try:
                     attr.unlock()
+                except Exception as e:
+                    traceback.print_exc()
 
-                intermediate_shapes = [s for s in node.getShapes() if s.intermediateObject.get()]
-                if intermediate_shapes:
-                    pm.delete(intermediate_shapes)
-
-            except Exception as e:
-                traceback.print_exc()
+            intermediate_shapes = [s for s in node.getShapes() if s.intermediateObject.get()]
+            if intermediate_shapes:
+                pm.delete(intermediate_shapes)
 
 
 def increase_manipulator_size_or_increment_select_vertices_below_positive():
