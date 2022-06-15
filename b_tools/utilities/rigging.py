@@ -212,6 +212,8 @@ def create_node_around_selection(node_type="transform"):
             pm.delete(consts)
             node.setMatrix(node_matrix)
 
+    pm.select(node)
+
     return node
 
 
