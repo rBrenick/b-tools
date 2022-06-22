@@ -461,9 +461,15 @@ def delete_history_or_remove_skinning():
         pm.mel.DeleteHistory()
 
         for node in pm.selected(type="transform"):
-            for attr in node.listAttr(keyable=True):
+            default_attrs = [
+                "translate", "translateX", "translateY", "translateZ",
+                "rotate", "rotateX", "rotateY", "rotateZ",
+                "scale", "scaleX", "scaleY", "scaleZ",
+                "visibility"
+            ]
+            for attr in default_attrs:
                 try:
-                    attr.unlock()
+                    node.attr(attr).unlock()
                 except Exception as e:
                     traceback.print_exc()
 
