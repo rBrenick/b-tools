@@ -18,7 +18,7 @@ common_startup()
 try:
     import b_tools.b_tools_dcc_setup
     b_tools.b_tools_dcc_setup.startup()
-except StandardError as e:
+except Exception as e:
     print(e)
     
     
