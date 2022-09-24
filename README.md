@@ -1,5 +1,5 @@
 # bTools
-Richard Brenick Maya Tools Module
+Personal Maya tools module
 
 ![tool header image](docs/header_image.png)
 
